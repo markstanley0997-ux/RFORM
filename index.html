@@ -40,17 +40,11 @@
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
-        .event-details {
-            background: #111;
-            padding: 15px;
-            border-left: 4px solid var(--gold);
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-
-        .form-step {
+        /* Form Steps & Success Message */
+        .form-step, #successMessage {
             display: none;
         }
 
@@ -74,11 +68,6 @@
             color: white;
             border-radius: 5px;
             box-sizing: border-box;
-        }
-
-        input:focus {
-            border-color: var(--gold);
-            outline: none;
         }
 
         .checkbox-group {
@@ -122,13 +111,36 @@
             flex: 1;
         }
 
-        .btn-next:hover, .btn-submit:hover {
-            background: var(--dark-gold);
-        }
-
         .btn-prev {
             background: #444;
             color: white;
+        }
+
+        /* Success/Zoom Card */
+        .zoom-card {
+            background: #111;
+            padding: 25px;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .zoom-link {
+            display: inline-block;
+            background: var(--gold);
+            color: black;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         footer {
@@ -137,73 +149,39 @@
             font-size: 0.8rem;
             color: #777;
         }
-
-        .progress-bar {
-            height: 4px;
-            background: #333;
-            margin-bottom: 30px;
-            border-radius: 2px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gold);
-            width: 25%;
-            transition: 0.4s;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
+    <div id="registrationHeader">
         <h1>FORGE IMPACT ACADEMY</h1>
-        <p style="text-align: center; color: var(--gold);">Government & Leadership</p>
-        
-        <div class="event-details">
-            📅 <strong>Date:</strong> March 5 <br>
-            🕗 <strong>Time:</strong> 8:00 PM (Belgium Time) <br>
-            🔗 <a href="https://zoom.us/j/84474883997?pwd=NjkwMjAz" style="color: var(--gold);">Join Zoom Meeting</a><br>
-            🆔 <strong>ID:</strong> 844 7488 3997 | 🔑 <strong>Pass:</strong> 690203
-        </div>
-    </header>
-
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
+        <p style="text-align: center; color: var(--gold); margin-top: -10px;">Government & Leadership</p>
     </div>
 
-    <form action="https://formsubmit.co/chrisfloresbelgium@gmail.com" method="POST">
+    <form id="regForm">
         <input type="hidden" name="_subject" value="New Forge Impact Registration!">
-        <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
-        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
 
         <div class="form-step active" id="step1">
             <h2>Personal Details</h2>
             <label>Full Name</label>
-            <input type="text" name="Full Name" placeholder="Enter your full name" required>
-            
+            <input type="text" name="Full Name" required>
             <label>Country / City</label>
-            <input type="text" name="Location" placeholder="e.g. Brussels, Belgium" required>
-            
+            <input type="text" name="Location" required>
             <label>Organization / Church / Company</label>
             <input type="text" name="Organization" required>
-            
-            <div class="btn-container">
-                <button type="button" class="btn-next" onclick="nextStep(2)">Next Step</button>
-            </div>
+            <button type="button" class="btn-next" onclick="nextStep(2)">Next Step</button>
         </div>
 
         <div class="form-step" id="step2">
             <h2>Contact Info</h2>
             <label>Role / Position</label>
-            <input type="text" name="Role" placeholder="e.g. CEO, Pastor, Manager" required>
-            
+            <input type="text" name="Role" required>
             <label>Email Address</label>
             <input type="email" name="Email" required>
-            
             <label>Phone / WhatsApp</label>
             <input type="tel" name="Phone" required>
-            
             <div class="btn-container">
                 <button type="button" class="btn-prev" onclick="prevStep(1)">Back</button>
                 <button type="button" class="btn-next" onclick="nextStep(3)">Next Step</button>
@@ -212,21 +190,17 @@
 
         <div class="form-step" id="step3">
             <h2>Leadership Profile</h2>
-            <label>What is your biggest leadership challenge today?</label>
-            <textarea name="Biggest Challenge" rows="2"></textarea>
-            
-            <label>What area do you need growth in most?</label>
+            <label>Biggest Leadership Challenge?</label>
+            <textarea name="Challenge" rows="2"></textarea>
+            <label>Area needing most growth?</label>
             <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox" name="Growth Area" value="Leadership"> Leadership</div>
-                <div class="checkbox-item"><input type="checkbox" name="Growth Area" value="Business"> Business</div>
-                <div class="checkbox-item"><input type="checkbox" name="Growth Area" value="Ministry"> Ministry</div>
-                <div class="checkbox-item"><input type="checkbox" name="Growth Area" value="Personal Development"> Personal</div>
-                <div class="checkbox-item"><input type="checkbox" name="Growth Area" value="Team/Org"> Team/Org</div>
+                <div class="checkbox-item"><input type="checkbox" name="Growth" value="Leadership"> Leadership</div>
+                <div class="checkbox-item"><input type="checkbox" name="Growth" value="Business"> Business</div>
+                <div class="checkbox-item"><input type="checkbox" name="Growth" value="Personal"> Personal</div>
+                <div class="checkbox-item"><input type="checkbox" name="Growth" value="Team"> Team/Org</div>
             </div>
-
-            <label>What nation / community are you called to impact?</label>
+            <label>Nation/Community called to impact?</label>
             <input type="text" name="Calling">
-
             <div class="btn-container">
                 <button type="button" class="btn-prev" onclick="prevStep(2)">Back</button>
                 <button type="button" class="btn-next" onclick="nextStep(4)">Next Step</button>
@@ -234,30 +208,30 @@
         </div>
 
         <div class="form-step" id="step4">
-            <h2>How Can We Help?</h2>
-            <label>Tell us how Forge Impact can support you:</label>
-            <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox" name="Support" value="Coaching"> Coaching</div>
-                <div class="checkbox-item"><input type="checkbox" name="Support" value="Strategy"> Strategy</div>
-                <div class="checkbox-item"><input type="checkbox" name="Support" value="Certification"> Training</div>
-                <div class="checkbox-item"><input type="checkbox" name="Support" value="Partnership"> Partnership</div>
-            </div>
-
+            <h2>Support & Message</h2>
             <label>Are you open to collaboration?</label>
-            <select name="Collaboration">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-
+            <select name="Collaboration"><option>Yes</option><option>No</option></select>
             <label>Write your need / message:</label>
             <textarea name="Message" rows="3"></textarea>
-
             <div class="btn-container">
                 <button type="button" class="btn-prev" onclick="prevStep(3)">Back</button>
-                <button type="submit" class="btn-submit">Complete Registration</button>
+                <button type="submit" class="btn-submit" id="submitBtn">Complete Registration</button>
             </div>
         </div>
     </form>
+
+    <div id="successMessage">
+        <div class="zoom-card">
+            <h2 style="color: #fff;">✅ Registration Successful!</h2>
+            <p>Thank you for joining <strong>Forge Impact Academy</strong>.</p>
+            <hr style="border-color: #333;">
+            <p>📅 <strong>Date:</strong> March 5</p>
+            <p>🕗 <strong>Time:</strong> 8:00 PM (Belgium Time)</p>
+            <p>🆔 <strong>Meeting ID:</strong> 844 7488 3997</p>
+            <p>🔑 <strong>Passcode:</strong> 690203</p>
+            <a href="https://zoom.us/j/84474883997?pwd=NjkwMjAz" class="zoom-link" target="_blank">JOIN ZOOM MEETING NOW</a>
+        </div>
+    </div>
 
     <footer>
         <p>Hosted by: <strong>Forge Impact Coaching Academy</strong></p>
@@ -269,14 +243,38 @@
     function nextStep(step) {
         document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
         document.getElementById('step' + step).classList.add('active');
-        document.getElementById('progressFill').style.width = (step * 25) + '%';
     }
 
     function prevStep(step) {
         document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
         document.getElementById('step' + step).classList.add('active');
-        document.getElementById('progressFill').style.width = (step * 25) + '%';
     }
+
+    // Handle Form Submission via AJAX
+    const form = document.getElementById('regForm');
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.innerHTML = "Processing...";
+        submitBtn.disabled = true;
+
+        const formData = new FormData(form);
+        
+        fetch("https://formsubmit.co/ajax/chrisfloresbelgium@gmail.com", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            form.style.display = "none";
+            document.getElementById('successMessage').style.display = "block";
+        })
+        .catch(error => {
+            alert("Submission failed. Please check your connection.");
+            submitBtn.innerHTML = "Complete Registration";
+            submitBtn.disabled = false;
+        });
+    });
 </script>
 
 </body>
